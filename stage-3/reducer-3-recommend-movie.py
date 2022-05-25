@@ -5,6 +5,7 @@
 Author: Ammar Hasan Razvi
 '''
 
+
 import sys
 from math import sqrt
 import csv
@@ -37,12 +38,8 @@ for row in csv.reader(iter(sys.stdin.readline, '')):
     genres = cGenres
     rating = cRating
     totalRatings = cTotalRatings
-    setA = []
-    for genre in genres:
-      setA.append(GENRE_FACTOR)
-
-    setA.append(cRating * RATING_FACTOR)
-    setA.append(cTotalRatings ** (1. / 3)) # cube root
+    setA = [GENRE_FACTOR for _ in genres]
+    setA.extend((rating * RATING_FACTOR, totalRatings**(1. / 3)))
     continue
 
   setB = []
@@ -55,10 +52,8 @@ for row in csv.reader(iter(sys.stdin.readline, '')):
 
   if sum(setB) == 0:
     continue
-  
-  setB.append(cRating * RATING_FACTOR)
-  setB.append(cTotalRatings ** (1. / 3))
 
+  setB.extend((cRating * RATING_FACTOR, cTotalRatings ** (1. / 3)))
   numerator = 0
   denomenatorA = 0
   denomenatorB = 0
@@ -72,4 +67,7 @@ for row in csv.reader(iter(sys.stdin.readline, '')):
 
   factor = round(numerator / denomenator, 5) # using cosine similarity
 
-  writer.writerow([float(factor), int(cMovieId), cTitle, cAllGenre, float(cRating), int(cTotalRatings)])
+  writer.writerow([
+      float(factor),
+      int(cMovieId), cTitle, cAllGenre, cRating, cTotalRatings
+  ])
