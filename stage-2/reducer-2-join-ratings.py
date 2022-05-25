@@ -33,7 +33,7 @@ def setProfile(row, profile=Profile()):
 movieId = None
 profile = None
 
-print('%s,%s,%s,%s,%s' % ('movieId', 'title', 'genre', 'rating', 'totalRatings'))
+print('movieId,title,genre,rating,totalRatings')
 
 writer = csv.writer(sys.stdout, quoting=csv.QUOTE_NONNUMERIC)
 for row in csv.reader(iter(sys.stdin.readline, '')):

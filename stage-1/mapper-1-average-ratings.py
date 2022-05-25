@@ -5,6 +5,7 @@
 Author: Ammar Hasan Razvi
 '''
 
+
 import sys
 import csv
 
@@ -16,4 +17,4 @@ for row in csv.reader(iter(sys.stdin.readline, '')):
   if row[0] == 'userId':
     continue
 
-  print('%s,%s' % (row[1], row[2]))
+  print(f'{row[1]},{row[2]}')
